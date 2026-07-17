@@ -392,8 +392,8 @@ export default function Home() {
         {/* 🌟 COZY, 100% RESPONSIVE DETAILS CARD MODAL 🌟 */}
         <AnimatePresence>
           {selectedProduct && (
-            // The scrolling viewport layer - simple, clean, no alignment styling here
-            <div className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg">
+            // FIX: Added 'h-screen' to force the container to match the physical screen height
+            <div className="fixed inset-0 z-50 h-screen overflow-y-auto bg-black/90 backdrop-blur-lg">
               
               {/* Flex alignment layer - ensures centering and padding without clipping */}
               <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10">
