@@ -301,7 +301,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* BISCUIT SHOWROOM */}
+{/* BISCUIT SHOWROOM */}
         <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14]">
           <div className="max-w-6xl mx-auto space-y-12">
             
@@ -388,20 +388,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 🌟 FIXED & LAYERED BISCUIT DETAILS MODAL 🌟 */}
+        {/* 🌟 LUXURIOUS, FLOATING DETAILS CARD MODAL 🌟 */}
         <AnimatePresence>
           {selectedProduct && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 overflow-y-auto bg-[#1e140d]/95 backdrop-blur-md flex items-center justify-center p-4 md:p-12"
+              // Changed items-center to items-start and added pt-28/pt-32 to create a premium card gutter layout
+              className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg flex items-start justify-center p-6 pt-28 md:p-12 md:pt-32"
             >
               
-              {/* Fixed Close Button - Always visible, stays pinned when scrolling details, sits on top level (z-100) */}
+              {/* Lowered Close Button - Safely avoids notches and status bars */}
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="fixed top-6 right-6 z-[100] p-3 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:bg-[#FFBF00]/80 hover:scale-110 active:scale-95 transition-all duration-300"
+                className="fixed top-8 right-6 md:top-10 md:right-12 z-[100] p-3.5 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-[#FFBF00]/80 hover:scale-110 active:scale-95 transition-all duration-300"
                 aria-label="Close details"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -409,13 +410,13 @@ export default function Home() {
                 </svg>
               </button>
 
-              {/* Modal Container Card */}
+              {/* Modal Container Card - Added robust padding and drop shadows */}
               <motion.div 
-                initial={{ scale: 0.95, y: 20 }}
+                initial={{ scale: 0.95, y: 30 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 20 }}
+                exit={{ scale: 0.95, y: 30 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="bg-[#3a2919] border border-[#FFBF00]/20 max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl relative p-8 md:p-12 mt-12 md:mt-0"
+                className="bg-[#3a2919] border border-[#FFBF00]/20 max-w-4xl w-full rounded-2xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative p-8 md:p-12 mb-16"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                   
@@ -469,7 +470,7 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
-
+        
         {/* INDUSTRIAL B2B CAPABILITIES */}
         <section id="capabilities" className="relative py-24 bg-[#140d08] px-6 md:px-12 border-b border-[#24170f]">
           <div className="max-w-6xl mx-auto space-y-16">
