@@ -302,7 +302,8 @@ export default function Home() {
         </section>
 
 {/* BISCUIT SHOWROOM */}
-        <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14]">
+        {/* Added overflow-hidden to stop background glows from creating a horizontal scrollbar */}
+        <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14] overflow-hidden">
           <div className="max-w-6xl mx-auto space-y-12">
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFBF00]/10 pb-8">
@@ -388,86 +389,87 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 🌟 LUXURIOUS, FLOATING DETAILS CARD MODAL 🌟 */}
+        {/* 🌟 COZY, 100% RESPONSIVE DETAILS CARD MODAL 🌟 */}
         <AnimatePresence>
           {selectedProduct && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              // Changed items-center to items-start and added pt-28/pt-32 to create a premium card gutter layout
-              className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg flex items-start justify-center p-6 pt-28 md:p-12 md:pt-32"
-            >
+            // The scrolling viewport layer - simple, clean, no alignment styling here
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg">
               
-              {/* Lowered Close Button - Safely avoids notches and status bars */}
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="fixed top-8 right-6 md:top-10 md:right-12 z-[100] p-3.5 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:bg-[#FFBF00]/80 hover:scale-110 active:scale-95 transition-all duration-300"
-                aria-label="Close details"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {/* Modal Container Card - Added robust padding and drop shadows */}
-              <motion.div 
-                initial={{ scale: 0.95, y: 30 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 30 }}
-                transition={{ type: "spring", duration: 0.5 }}
-                className="bg-[#3a2919] border border-[#FFBF00]/20 max-w-4xl w-full rounded-2xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative p-8 md:p-12 mb-16"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Flex alignment layer - ensures centering and padding without clipping */}
+              <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10">
+                
+                {/* Modal Container Card */}
+                <motion.div 
+                  initial={{ scale: 0.95, y: 30 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.95, y: 30 }}
+                  transition={{ type: "spring", duration: 0.5 }}
+                  className="bg-[#3a2919] border border-[#FFBF00]/20 max-w-4xl w-full rounded-2xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative p-6 md:p-12 my-8"
+                >
                   
-                  {/* Left Side: Product Gradient Showcase */}
-                  <div className="relative aspect-square w-full bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex flex-col items-center justify-center border border-[#FFBF00]/10 overflow-hidden group/modal-img">
-                    {/* Glowing Accent Ring */}
-                    <div className={`absolute -inset-4 bg-gradient-to-tr ${selectedProduct.color} opacity-20 blur-2xl group-hover/modal-img:opacity-30 transition-all duration-500`} />
+                  {/* Close Button - Placed absolute inside the card top-right. Never gets cut off! */}
+                  <button
+                    onClick={() => setSelectedProduct(null)}
+                    className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-2.5 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-md hover:bg-[#FFBF00]/80 hover:scale-105 active:scale-95 transition-all duration-300"
+                    aria-label="Close details"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+
+                  {/* Added pt-10 on mobile to prevent the Close button from overlapping the card content */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-10 md:pt-0">
                     
-                    <div className="z-10 text-center space-y-2">
-                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#FFBF00]/70 block font-bold">Premium Range</span>
-                      <h4 className="text-4xl font-black text-white tracking-widest">{selectedProduct.tag}</h4>
-                      <span className="text-xs text-[#F5F5DC]/40 uppercase tracking-widest">{selectedProduct.category}</span>
-                    </div>
-                  </div>
-
-                  {/* Right Side: Product Narrative */}
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <div className="inline-block bg-[#FFBF00]/10 border border-[#FFBF00]/30 rounded px-2.5 py-0.5 text-[9px] font-bold text-[#FFBF00] tracking-widest uppercase">
-                        {selectedProduct.category}
+                    {/* Left Side: Product Gradient Showcase */}
+                    <div className="relative aspect-square w-full bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex flex-col items-center justify-center border border-[#FFBF00]/10 overflow-hidden group/modal-img">
+                      {/* Glowing Accent Ring */}
+                      <div className={`absolute -inset-4 bg-gradient-to-tr ${selectedProduct.color} opacity-20 blur-2xl group-hover/modal-img:opacity-30 transition-all duration-500`} />
+                      
+                      <div className="z-10 text-center space-y-2">
+                        <span className="text-[10px] tracking-[0.3em] uppercase text-[#FFBF00]/70 block font-bold">Premium Range</span>
+                        <h4 className="text-4xl font-black text-white tracking-widest">{selectedProduct.tag}</h4>
+                        <span className="text-xs text-[#F5F5DC]/40 uppercase tracking-widest">{selectedProduct.category}</span>
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-semibold tracking-wide text-white">
-                        {selectedProduct.tag}
-                      </h3>
-                      <p className="text-lg text-[#FFBF00] font-medium tracking-wide">
-                        {selectedProduct.amharic}
+                    </div>
+
+                    {/* Right Side: Product Narrative */}
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <div className="inline-block bg-[#FFBF00]/10 border border-[#FFBF00]/30 rounded px-2.5 py-0.5 text-[9px] font-bold text-[#FFBF00] tracking-widest uppercase">
+                          {selectedProduct.category}
+                        </div>
+                        <h3 className="text-3xl md:text-4xl font-semibold tracking-wide text-white">
+                          {selectedProduct.tag}
+                        </h3>
+                        <p className="text-lg text-[#FFBF00] font-medium tracking-wide">
+                          {selectedProduct.amharic}
+                        </p>
+                      </div>
+
+                      <div className="h-px bg-[#FFBF00]/10 w-full" />
+
+                      <p className="text-sm font-light text-[#F5F5DC]/80 leading-relaxed">
+                        Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
                       </p>
-                    </div>
 
-                    <div className="h-px bg-[#FFBF00]/10 w-full" />
-
-                    <p className="text-sm font-light text-[#F5F5DC]/80 leading-relaxed">
-                      Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
-                    </p>
-
-                    <div className="bg-[#1e140d]/40 rounded-xl p-4 border border-[#FFBF00]/5 flex items-center justify-between">
-                      <div className="space-y-1">
-                        <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Package Weight</span>
-                        <span className="text-xs text-[#F5F5DC] font-semibold">Standard Retail Box</span>
-                      </div>
-                      <div className="space-y-1 text-right">
-                        <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Ingredients</span>
-                        <span className="text-xs text-[#FFBF00] font-semibold">100% Local Flour</span>
+                      <div className="bg-[#1e140d]/40 rounded-xl p-4 border border-[#FFBF00]/5 flex items-center justify-between">
+                        <div className="space-y-1">
+                          <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Package Weight</span>
+                          <span className="text-xs text-[#F5F5DC] font-semibold">Standard Retail Box</span>
+                        </div>
+                        <div className="space-y-1 text-right">
+                          <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Ingredients</span>
+                          <span className="text-xs text-[#FFBF00] font-semibold">100% Local Flour</span>
+                        </div>
                       </div>
                     </div>
+
                   </div>
+                </motion.div>
 
-                </div>
-              </motion.div>
-
-            </motion.div>
+              </div>
+            </div>
           )}
         </AnimatePresence>
         
