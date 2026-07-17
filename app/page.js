@@ -301,7 +301,7 @@ export default function Home() {
           </div>
         </section>
 
-{/* BISCUIT SHOWROOM - FULLY RESTORED LOGIC */}
+{/* BISCUIT SHOWROOM - FULL DATA & FLAT LAYOUT */}
 <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14] overflow-hidden">
   <div className="max-w-6xl mx-auto space-y-12">
     
@@ -346,9 +346,7 @@ export default function Home() {
             className="group bg-[#3a2919]/60 border border-[#FFBF00]/15 hover:border-[#FFBF00]/40 rounded-xl p-6 flex flex-col justify-between h-80 transition-all cursor-pointer relative overflow-hidden"
           >
             <div className={`absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br ${prod.color} opacity-10 group-hover:opacity-20 blur-xl transition-all rounded-full`} />
-            <div className="flex justify-between items-start z-10">
-              <div className="bg-[#FFBF00]/10 border border-[#FFBF00]/30 rounded px-2.5 py-0.5 text-[9px] font-bold text-[#FFBF00] uppercase tracking-widest">{prod.category}</div>
-            </div>
+            <div className="z-10 text-[9px] font-bold text-[#FFBF00] uppercase tracking-widest">{prod.category}</div>
             <div className="my-auto space-y-2 z-10">
               <h4 className="text-lg font-semibold text-white group-hover:text-[#FFBF00]">{prod.tag}</h4>
               <p className="text-[10px] text-[#F5F5DC]/60 uppercase tracking-widest">{prod.amharic}</p>
@@ -368,30 +366,41 @@ export default function Home() {
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
-        className="w-full max-w-4xl bg-[#3a2919] border border-[#FFBF00]/20 rounded-2xl overflow-hidden shadow-2xl relative p-6 md:p-12 my-8"
+        className="w-full max-w-4xl max-h-[90vh] bg-[#3a2919] border border-[#FFBF00]/20 rounded-2xl overflow-y-auto shadow-2xl relative p-6 md:p-12"
       >
         <button
           onClick={() => setSelectedProduct(null)}
-          className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-2.5 rounded-full bg-[#FFBF00] text-[#1e140d] hover:bg-[#FFBF00]/80 transition-all"
+          className="sticky top-0 left-[95%] z-[110] p-3 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-lg hover:bg-[#FFBF00]/80 transition-all"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center pt-6">
-          <div className="aspect-square bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex items-center justify-center border border-[#FFBF00]/10">
-            <h4 className="text-4xl font-black text-white">{selectedProduct.tag}</h4>
-          </div>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Detailed Image & Highlights */}
           <div className="space-y-6">
-            <h3 className="text-3xl text-white">{selectedProduct.tag}</h3>
-            <p className="text-lg text-[#FFBF00]">{selectedProduct.amharic}</p>
-            <p className="text-sm text-[#F5F5DC]/80">Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch.</p>
+            <div className="aspect-square bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex items-center justify-center border border-[#FFBF00]/10">
+              <h4 className="text-4xl font-black text-white">{selectedProduct.tag}</h4>
+            </div>
+            <div className="bg-[#1e140d]/40 rounded-xl p-4 border border-[#FFBF00]/5 flex justify-between">
+              <div><span className="text-[10px] text-[#F5F5DC]/40 uppercase block">Weight</span><span className="text-xs text-[#F5F5DC]">75g Individual Wrap</span></div>
+              <div className="text-right"><span className="text-[10px] text-[#F5F5DC]/40 uppercase block">Ingredients</span><span className="text-xs text-[#FFBF00]">100% Local Flour</span></div>
+            </div>
+          </div>
+
+          {/* Full Narrative */}
+          <div className="space-y-6">
+            <h3 className="text-3xl text-white font-light">{selectedProduct.tag}</h3>
+            <p className="text-lg text-[#FFBF00] font-medium">{selectedProduct.amharic}</p>
+            <p className="text-sm text-[#F5F5DC]/80 leading-relaxed">
+              Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
+            </p>
+            
           </div>
         </div>
       </motion.div>
     </div>
   )}
 </AnimatePresence>
-
         {/* INDUSTRIAL B2B CAPABILITIES */}
         <section id="capabilities" className="relative py-24 bg-[#140d08] px-6 md:px-12 border-b border-[#24170f]">
           <div className="max-w-6xl mx-auto space-y-16">
