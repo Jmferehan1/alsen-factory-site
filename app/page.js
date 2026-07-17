@@ -387,9 +387,7 @@ export default function Home() {
               {selectedProduct.description}
             </p>
 
-            <button className="w-full py-5 border border-[#FFBF00] text-[#FFBF00] hover:bg-[#FFBF00] hover:text-black transition-all duration-300 uppercase tracking-widest font-bold rounded-xl">
-              Request Retail Samples
-            </button>
+            
           </div>
         </div>
       </motion.div>
