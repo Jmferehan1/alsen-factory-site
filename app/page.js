@@ -303,43 +303,42 @@ export default function Home() {
 
 {/* BISCUIT SHOWROOM - PREMIUM INTERACTIVE DESIGN */}
 <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14] overflow-hidden">
-  <div className="max-w-6xl mx-auto space-y-12">
+  <div className="max-w-6xl mx-auto space-y-16">
     
-    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFBF00]/10 pb-8">
-      <div className="space-y-3">
-        <span className="text-[10px] tracking-[0.4em] uppercase text-[#FFBF00] font-bold block">Confectionery Division</span>
-        <h3 className="text-4xl md:text-5xl font-light uppercase tracking-wide text-[#F5F5DC]">NAIF Sweet Collection</h3>
-        <p className="text-sm font-light text-[#F5F5DC]/60 max-w-xl">
-          Discover the exquisite world of NAIF. Crafted for the golden crunch.
-        </p>
-      </div>
+    {/* Header */}
+    <div className="text-center md:text-left space-y-4">
+      <h2 className="text-[10px] font-bold tracking-[0.5em] text-[#FFBF00] uppercase">The Confectionery Atelier</h2>
+      <h3 className="text-5xl md:text-7xl font-light text-[#F5F5DC] tracking-tight">NAIF <span className="text-[#FFBF00]">Sweet Collection</span></h3>
     </div>
 
     {/* The Interactive Grid */}
-    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <AnimatePresence mode="popLayout">
         {filteredBiscuits.map((prod) => (
           <motion.div
             key={prod.name}
             layout
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -8 }}
+            whileHover={{ y: -10 }}
             onClick={() => setSelectedProduct(prod)}
-            className="group relative bg-[#3a2919]/60 border border-[#FFBF00]/15 hover:border-[#FFBF00]/40 rounded-3xl p-8 flex flex-col justify-end h-80 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer overflow-hidden"
+            className="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer border border-[#FFBF00]/10 hover:border-[#FFBF00]/50 transition-all duration-700"
           >
-            {/* Background luxury gradient */}
+            {/* Background layer with hover glow */}
             <div className={`absolute inset-0 bg-gradient-to-br ${prod.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700`} />
             
-            {/* Subtle interactive hint */}
-            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="w-2 h-2 bg-[#FFBF00] rounded-full animate-ping" />
-            </div>
+            <div className="absolute inset-0 p-8 flex flex-col justify-between">
+              <span className="text-[#FFBF00] text-[9px] font-bold uppercase tracking-[0.3em]">{prod.category}</span>
+              
+              <div className="space-y-2">
+                <h4 className="text-2xl font-light text-[#F5F5DC] group-hover:text-[#FFBF00] transition-colors">{prod.tag}</h4>
+                <p className="text-[10px] text-[#F5F5DC]/50 uppercase tracking-widest italic">{prod.amharic}</p>
+              </div>
 
-            <div className="z-10 space-y-2">
-              <span className="text-[9px] font-bold text-[#FFBF00] uppercase tracking-widest">{prod.category}</span>
-              <h4 className="text-2xl font-light text-white group-hover:text-[#FFBF00] transition-colors">{prod.tag}</h4>
-              <p className="text-[10px] text-[#F5F5DC]/60 uppercase tracking-widest italic">{prod.amharic}</p>
+              <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                <div className="w-8 h-[1px] bg-[#FFBF00]" />
+                <span className="text-[#FFBF00] text-[10px] uppercase tracking-widest font-bold">Discover</span>
+              </div>
             </div>
           </motion.div>
         ))}
@@ -356,9 +355,8 @@ export default function Home() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full h-full md:h-auto md:max-w-4xl bg-[#1e140d]/90 border-t md:border border-[#FFBF00]/20 md:rounded-3xl shadow-2xl relative overflow-y-auto"
+        className="w-full h-full md:h-auto md:max-w-5xl bg-[#1e140d]/95 border-t md:border border-[#FFBF00]/20 md:rounded-3xl shadow-2xl relative overflow-y-auto"
       >
-        {/* Close Button - Floated */}
         <button
           onClick={() => setSelectedProduct(null)}
           className="absolute top-6 right-6 z-[110] p-4 rounded-full bg-[#FFBF00]/10 hover:bg-[#FFBF00] text-[#FFBF00] hover:text-black transition-all duration-300"
@@ -366,30 +364,32 @@ export default function Home() {
           <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-0">
-          {/* Visual Side */}
-          <div className="h-80 md:h-auto bg-gradient-to-br from-[#4B3621] to-[#1e140d] flex items-center justify-center p-12">
-            <h4 className="text-5xl font-black text-white text-center tracking-tighter">{selectedProduct.tag}</h4>
+        <div className="grid md:grid-cols-2 gap-0 min-h-[500px]">
+          {/* Left: Product Identity */}
+          <div className="bg-[#2d1f14] p-12 flex flex-col justify-center items-center text-center">
+             <h4 className="text-6xl font-black text-white tracking-tighter">{selectedProduct.tag}</h4>
+             <p className="text-[#FFBF00] mt-4 uppercase tracking-[0.2em] text-xs">{selectedProduct.category}</p>
           </div>
 
-          {/* Content Side */}
-          <div className="p-8 md:p-12 space-y-8">
-            <div className="space-y-2">
-              <span className="text-[#FFBF00] text-[10px] font-bold uppercase tracking-[0.2em]">{selectedProduct.category}</span>
+          {/* Right: Product Narrative */}
+          <div className="p-8 md:p-12 space-y-8 flex flex-col justify-center">
+            <div className="space-y-4">
               <h3 className="text-4xl text-white font-light">{selectedProduct.tag}</h3>
-              <p className="text-xl text-[#FFBF00] italic">{selectedProduct.amharic}</p>
+              <p className="text-xl text-[#FFBF00] italic font-light">{selectedProduct.amharic}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 border-y border-[#FFBF00]/10 py-6">
-              <div><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Weight</span><span className="text-sm text-[#F5F5DC]">75g Per Wrap</span></div>
-              <div className="text-right"><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Quality</span><span className="text-sm text-[#FFBF00]">100% Local Flour</span></div>
+              <div><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Weight</span><span className="text-sm text-[#F5F5DC]">{selectedProduct.weight}</span></div>
+              <div className="text-right"><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Ingredients</span><span className="text-sm text-[#FFBF00]">{selectedProduct.ingredients}</span></div>
             </div>
 
-            <p className="text-sm text-[#F5F5DC]/70 leading-relaxed">
-              Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
+            <p className="text-sm text-[#F5F5DC]/70 leading-relaxed font-light">
+              {selectedProduct.description}
             </p>
 
-            
+            <button className="w-full py-5 border border-[#FFBF00] text-[#FFBF00] hover:bg-[#FFBF00] hover:text-black transition-all duration-300 uppercase tracking-widest font-bold rounded-xl">
+              Request Retail Samples
+            </button>
           </div>
         </div>
       </motion.div>
