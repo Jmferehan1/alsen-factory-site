@@ -388,6 +388,88 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 🌟 FIXED & LAYERED BISCUIT DETAILS MODAL 🌟 */}
+        <AnimatePresence>
+          {selectedProduct && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 overflow-y-auto bg-[#1e140d]/95 backdrop-blur-md flex items-center justify-center p-4 md:p-12"
+            >
+              
+              {/* Fixed Close Button - Always visible, stays pinned when scrolling details, sits on top level (z-100) */}
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="fixed top-6 right-6 z-[100] p-3 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:bg-[#FFBF00]/80 hover:scale-110 active:scale-95 transition-all duration-300"
+                aria-label="Close details"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {/* Modal Container Card */}
+              <motion.div 
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20 }}
+                transition={{ type: "spring", duration: 0.5 }}
+                className="bg-[#3a2919] border border-[#FFBF00]/20 max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl relative p-8 md:p-12 mt-12 md:mt-0"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                  
+                  {/* Left Side: Product Gradient Showcase */}
+                  <div className="relative aspect-square w-full bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex flex-col items-center justify-center border border-[#FFBF00]/10 overflow-hidden group/modal-img">
+                    {/* Glowing Accent Ring */}
+                    <div className={`absolute -inset-4 bg-gradient-to-tr ${selectedProduct.color} opacity-20 blur-2xl group-hover/modal-img:opacity-30 transition-all duration-500`} />
+                    
+                    <div className="z-10 text-center space-y-2">
+                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#FFBF00]/70 block font-bold">Premium Range</span>
+                      <h4 className="text-4xl font-black text-white tracking-widest">{selectedProduct.tag}</h4>
+                      <span className="text-xs text-[#F5F5DC]/40 uppercase tracking-widest">{selectedProduct.category}</span>
+                    </div>
+                  </div>
+
+                  {/* Right Side: Product Narrative */}
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <div className="inline-block bg-[#FFBF00]/10 border border-[#FFBF00]/30 rounded px-2.5 py-0.5 text-[9px] font-bold text-[#FFBF00] tracking-widest uppercase">
+                        {selectedProduct.category}
+                      </div>
+                      <h3 className="text-3xl md:text-4xl font-semibold tracking-wide text-white">
+                        {selectedProduct.tag}
+                      </h3>
+                      <p className="text-lg text-[#FFBF00] font-medium tracking-wide">
+                        {selectedProduct.amharic}
+                      </p>
+                    </div>
+
+                    <div className="h-px bg-[#FFBF00]/10 w-full" />
+
+                    <p className="text-sm font-light text-[#F5F5DC]/80 leading-relaxed">
+                      Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
+                    </p>
+
+                    <div className="bg-[#1e140d]/40 rounded-xl p-4 border border-[#FFBF00]/5 flex items-center justify-between">
+                      <div className="space-y-1">
+                        <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Package Weight</span>
+                        <span className="text-xs text-[#F5F5DC] font-semibold">Standard Retail Box</span>
+                      </div>
+                      <div className="space-y-1 text-right">
+                        <span className="text-[10px] text-[#F5F5DC]/40 uppercase tracking-wider block">Ingredients</span>
+                        <span className="text-xs text-[#FFBF00] font-semibold">100% Local Flour</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </motion.div>
+
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* INDUSTRIAL B2B CAPABILITIES */}
         <section id="capabilities" className="relative py-24 bg-[#140d08] px-6 md:px-12 border-b border-[#24170f]">
           <div className="max-w-6xl mx-auto space-y-16">
