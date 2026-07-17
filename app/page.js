@@ -301,34 +301,17 @@ export default function Home() {
           </div>
         </section>
 
-{/* BISCUIT SHOWROOM - FULL DATA & FLAT LAYOUT */}
+{/* BISCUIT SHOWROOM - PREMIUM INTERACTIVE DESIGN */}
 <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14] overflow-hidden">
   <div className="max-w-6xl mx-auto space-y-12">
     
-    {/* Header & Filter Tabs */}
     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#FFBF00]/10 pb-8">
       <div className="space-y-3">
-        <span className="text-xs tracking-[0.4em] uppercase text-[#FFBF00] font-bold block">Confectionery Division</span>
+        <span className="text-[10px] tracking-[0.4em] uppercase text-[#FFBF00] font-bold block">Confectionery Division</span>
         <h3 className="text-4xl md:text-5xl font-light uppercase tracking-wide text-[#F5F5DC]">NAIF Sweet Collection</h3>
         <p className="text-sm font-light text-[#F5F5DC]/60 max-w-xl">
-          Discover the exquisite world of NAIF. Every cookie and biscuit is crafted using our own high-protein local flour to deliver an unbeatable golden crunch.
+          Discover the exquisite world of NAIF. Crafted for the golden crunch.
         </p>
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {['all', 'cookies', 'biscuits', 'sandwich'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setBiscuitFilter(tab)}
-            className={`px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 ${
-              biscuitFilter === tab
-                ? "bg-[#FFBF00] text-black font-bold shadow-[0_0_12px_rgba(255,191,0,0.25)]"
-                : "bg-[#3a2919] text-[#F5F5DC]/70 border border-[#FFBF00]/10 hover:text-[#F5F5DC] hover:bg-[#4B3621]"
-            }`}
-          >
-            {tab === 'all' ? 'Show All' : tab}
-          </button>
-        ))}
       </div>
     </div>
 
@@ -339,17 +322,24 @@ export default function Home() {
           <motion.div
             key={prod.name}
             layout
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -8 }}
             onClick={() => setSelectedProduct(prod)}
-            className="group bg-[#3a2919]/60 border border-[#FFBF00]/15 hover:border-[#FFBF00]/40 rounded-xl p-6 flex flex-col justify-between h-80 transition-all cursor-pointer relative overflow-hidden"
+            className="group relative bg-[#3a2919]/60 border border-[#FFBF00]/15 hover:border-[#FFBF00]/40 rounded-3xl p-8 flex flex-col justify-end h-80 transition-all duration-500 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer overflow-hidden"
           >
-            <div className={`absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-br ${prod.color} opacity-10 group-hover:opacity-20 blur-xl transition-all rounded-full`} />
-            <div className="z-10 text-[9px] font-bold text-[#FFBF00] uppercase tracking-widest">{prod.category}</div>
-            <div className="my-auto space-y-2 z-10">
-              <h4 className="text-lg font-semibold text-white group-hover:text-[#FFBF00]">{prod.tag}</h4>
-              <p className="text-[10px] text-[#F5F5DC]/60 uppercase tracking-widest">{prod.amharic}</p>
+            {/* Background luxury gradient */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${prod.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700`} />
+            
+            {/* Subtle interactive hint */}
+            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="w-2 h-2 bg-[#FFBF00] rounded-full animate-ping" />
+            </div>
+
+            <div className="z-10 space-y-2">
+              <span className="text-[9px] font-bold text-[#FFBF00] uppercase tracking-widest">{prod.category}</span>
+              <h4 className="text-2xl font-light text-white group-hover:text-[#FFBF00] transition-colors">{prod.tag}</h4>
+              <p className="text-[10px] text-[#F5F5DC]/60 uppercase tracking-widest italic">{prod.amharic}</p>
             </div>
           </motion.div>
         ))}
@@ -358,49 +348,58 @@ export default function Home() {
   </div>
 </section>
 
-{/* 🌟 LOCKED-TO-SCREEN DETAILS MODAL 🌟 */}
+{/* 🌟 LUXURY GLASS MODAL 🌟 */}
 <AnimatePresence>
   {selectedProduct && (
-    <div className="fixed inset-0 z-[100] h-screen overflow-y-auto bg-black/95 backdrop-blur-lg flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] h-screen flex items-center justify-center p-0 md:p-6 bg-black/80 backdrop-blur-xl">
       <motion.div 
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        className="w-full max-w-4xl max-h-[90vh] bg-[#3a2919] border border-[#FFBF00]/20 rounded-2xl overflow-y-auto shadow-2xl relative p-6 md:p-12"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="w-full h-full md:h-auto md:max-w-4xl bg-[#1e140d]/90 border-t md:border border-[#FFBF00]/20 md:rounded-3xl shadow-2xl relative overflow-y-auto"
       >
+        {/* Close Button - Floated */}
         <button
           onClick={() => setSelectedProduct(null)}
-          className="sticky top-0 left-[95%] z-[110] p-3 rounded-full bg-[#FFBF00] text-[#1e140d] shadow-lg hover:bg-[#FFBF00]/80 transition-all"
+          className="absolute top-6 right-6 z-[110] p-4 rounded-full bg-[#FFBF00]/10 hover:bg-[#FFBF00] text-[#FFBF00] hover:text-black transition-all duration-300"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Detailed Image & Highlights */}
-          <div className="space-y-6">
-            <div className="aspect-square bg-gradient-to-br from-[#4B3621] to-[#1e140d] rounded-2xl flex items-center justify-center border border-[#FFBF00]/10">
-              <h4 className="text-4xl font-black text-white">{selectedProduct.tag}</h4>
-            </div>
-            <div className="bg-[#1e140d]/40 rounded-xl p-4 border border-[#FFBF00]/5 flex justify-between">
-              <div><span className="text-[10px] text-[#F5F5DC]/40 uppercase block">Weight</span><span className="text-xs text-[#F5F5DC]">75g Individual Wrap</span></div>
-              <div className="text-right"><span className="text-[10px] text-[#F5F5DC]/40 uppercase block">Ingredients</span><span className="text-xs text-[#FFBF00]">100% Local Flour</span></div>
-            </div>
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-0">
+          {/* Visual Side */}
+          <div className="h-80 md:h-auto bg-gradient-to-br from-[#4B3621] to-[#1e140d] flex items-center justify-center p-12">
+            <h4 className="text-5xl font-black text-white text-center tracking-tighter">{selectedProduct.tag}</h4>
           </div>
 
-          {/* Full Narrative */}
-          <div className="space-y-6">
-            <h3 className="text-3xl text-white font-light">{selectedProduct.tag}</h3>
-            <p className="text-lg text-[#FFBF00] font-medium">{selectedProduct.amharic}</p>
-            <p className="text-sm text-[#F5F5DC]/80 leading-relaxed">
+          {/* Content Side */}
+          <div className="p-8 md:p-12 space-y-8">
+            <div className="space-y-2">
+              <span className="text-[#FFBF00] text-[10px] font-bold uppercase tracking-[0.2em]">{selectedProduct.category}</span>
+              <h3 className="text-4xl text-white font-light">{selectedProduct.tag}</h3>
+              <p className="text-xl text-[#FFBF00] italic">{selectedProduct.amharic}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 border-y border-[#FFBF00]/10 py-6">
+              <div><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Weight</span><span className="text-sm text-[#F5F5DC]">75g Per Wrap</span></div>
+              <div className="text-right"><span className="text-[9px] text-[#F5F5DC]/40 uppercase block">Quality</span><span className="text-sm text-[#FFBF00]">100% Local Flour</span></div>
+            </div>
+
+            <p className="text-sm text-[#F5F5DC]/70 leading-relaxed">
               Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
             </p>
-            
+
+            <button className="w-full py-5 bg-[#FFBF00] text-black font-bold uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-transform">
+              Request Samples
+            </button>
           </div>
         </div>
       </motion.div>
     </div>
   )}
 </AnimatePresence>
+
+
         {/* INDUSTRIAL B2B CAPABILITIES */}
         <section id="capabilities" className="relative py-24 bg-[#140d08] px-6 md:px-12 border-b border-[#24170f]">
           <div className="max-w-6xl mx-auto space-y-16">
