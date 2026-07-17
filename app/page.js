@@ -389,9 +389,7 @@ export default function Home() {
               Every single bite of our custom biscuits is baked using high-protein, locally milled flour from the Alsen mills. Crafted to hold its golden crunch, NAIF sweets pair beautifully with hot tea, traditional coffee, or make for the perfect standalone treat.
             </p>
 
-            <button className="w-full py-5 bg-[#FFBF00] text-black font-bold uppercase tracking-widest rounded-xl hover:scale-[1.02] transition-transform">
-              Request Samples
-            </button>
+            
           </div>
         </div>
       </motion.div>
