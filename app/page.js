@@ -305,10 +305,13 @@ export default function Home() {
 <section id="biscuit-details" className="relative min-h-screen w-full py-24 bg-[#1e140d] px-6 md:px-12 border-b border-[#2d1f14] overflow-hidden">
   <div className="max-w-6xl mx-auto space-y-16">
     
-    {/* Header */}
+    {/* Editorial Header */}
     <div className="text-center md:text-left space-y-4">
       <h2 className="text-[10px] font-bold tracking-[0.5em] text-[#FFBF00] uppercase">The Confectionery Atelier</h2>
       <h3 className="text-5xl md:text-7xl font-light text-[#F5F5DC] tracking-tight">NAIF <span className="text-[#FFBF00]">Sweet Collection</span></h3>
+      <p className="text-[#F5F5DC]/60 max-w-xl md:mx-0 mx-auto text-sm italic">
+        A curated selection of artisanal biscuits, crafted with locally milled high-protein flour and premium ingredients for an unparalleled golden crunch.
+      </p>
     </div>
 
     {/* The Interactive Grid */}
@@ -320,24 +323,27 @@ export default function Home() {
             layout
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -10 }}
             onClick={() => setSelectedProduct(prod)}
             className="group relative h-[400px] rounded-3xl overflow-hidden cursor-pointer border border-[#FFBF00]/10 hover:border-[#FFBF00]/50 transition-all duration-700"
           >
-            {/* Background layer with hover glow */}
             <div className={`absolute inset-0 bg-gradient-to-br ${prod.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700`} />
             
+            {/* Persistent Indicator for Touch Users */}
+            <div className="absolute top-6 right-6">
+              <div className="w-3 h-3 bg-[#FFBF00] rounded-full animate-pulse shadow-[0_0_10px_rgba(255,191,0,0.6)]" />
+            </div>
+
             <div className="absolute inset-0 p-8 flex flex-col justify-between">
               <span className="text-[#FFBF00] text-[9px] font-bold uppercase tracking-[0.3em]">{prod.category}</span>
               
               <div className="space-y-2">
-                <h4 className="text-2xl font-light text-[#F5F5DC] group-hover:text-[#FFBF00] transition-colors">{prod.tag}</h4>
+                <h4 className="text-2xl font-light text-[#F5F5DC]">{prod.tag}</h4>
                 <p className="text-[10px] text-[#F5F5DC]/50 uppercase tracking-widest italic">{prod.amharic}</p>
               </div>
 
-              <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-[1px] bg-[#FFBF00]" />
-                <span className="text-[#FFBF00] text-[10px] uppercase tracking-widest font-bold">Discover</span>
+                <span className="text-[#FFBF00] text-[10px] uppercase tracking-widest font-bold">Tap to Explore</span>
               </div>
             </div>
           </motion.div>
@@ -365,13 +371,13 @@ export default function Home() {
         </button>
 
         <div className="grid md:grid-cols-2 gap-0 min-h-[500px]">
-          {/* Left: Product Identity */}
+          {/* Identity Side */}
           <div className="bg-[#2d1f14] p-12 flex flex-col justify-center items-center text-center">
              <h4 className="text-6xl font-black text-white tracking-tighter">{selectedProduct.tag}</h4>
              <p className="text-[#FFBF00] mt-4 uppercase tracking-[0.2em] text-xs">{selectedProduct.category}</p>
           </div>
 
-          {/* Right: Product Narrative */}
+          {/* Details Side */}
           <div className="p-8 md:p-12 space-y-8 flex flex-col justify-center">
             <div className="space-y-4">
               <h3 className="text-4xl text-white font-light">{selectedProduct.tag}</h3>
@@ -387,7 +393,9 @@ export default function Home() {
               {selectedProduct.description}
             </p>
 
-            
+            <button className="w-full py-5 border border-[#FFBF00] text-[#FFBF00] hover:bg-[#FFBF00] hover:text-black transition-all duration-300 uppercase tracking-widest font-bold rounded-xl">
+              Request Retail Samples
+            </button>
           </div>
         </div>
       </motion.div>
